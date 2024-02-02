@@ -1,10 +1,22 @@
-FROM cm2network/steamcmd:root
+FROM liasica/steamcmd:root
 LABEL maintainer="thijs@loef.dev"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    xdg-user-dirs=0.17-2 \
-    procps=2:3.3.17-5 \
-    wget=1.21-1+deb11u1 \
+    xdg-user-dirs \
+    procps \
+    wget \
+    && cd ~ && apt update && apt -y install build-essential gcc git zip unzip python3 \
+    && curl https://sh.rustup.rs -sSf | sh -s -- -y \
+    && . "$HOME/.cargo/env" \
+    && curl https://wasmtime.dev/install.sh -sSf | bash \
+    && curl -fsSL https://xmake.io/shget.text | bash \
+    && echo 'export XMAKE_ROOT=y' >> ~/.xmake/profile \
+    && echo '. ~/.xmake/profile' >> ~/.bashrc \
+    && git clone --recursive https://github.com/VeroFess/PalWorld-Server-Unoffical-Api.git \
+    && cd PalWorld-Server-Unoffical-Api \
+    && . ~/.bashrc \
+    && xmake -y \
+    && cp -f ./build/linux/x86_64/release/libpal-plugin-loader.so /usr/lib64/ \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

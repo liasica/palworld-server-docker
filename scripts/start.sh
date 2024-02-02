@@ -325,5 +325,8 @@ EOL
 
 printf "\e[0;32m*****STARTING SERVER*****\e[0m\n"
 echo "${STARTCOMMAND[*]}"
+# inject libpal-plugin-loader.so
+sed 's/"\$/LD_PRELOAD=\/usr\/lib64\/libpal-plugin-loader.so "\$/g' /palworld/PalServer.sh
+
 "${STARTCOMMAND[@]}"
 
