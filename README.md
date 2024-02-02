@@ -1,5 +1,10 @@
 # Palworld Dedicated Server Docker
 
+```
+docker build -t liasica/steamcmd --target bookworm-root ./steamcmd
+docker build -t liasica/palworld-server-docker .
+```
+
 [![Release](https://img.shields.io/github/v/release/thijsvanloef/palworld-server-docker)](https://github.com/thijsvanloef/palworld-server-docker/releases)
 [![Docker Pulls](https://img.shields.io/docker/pulls/thijsvanloef/palworld-server-docker)](https://hub.docker.com/r/thijsvanloef/palworld-server-docker)
 [![Docker Stars](https://img.shields.io/docker/stars/thijsvanloef/palworld-server-docker)](https://hub.docker.com/r/thijsvanloef/palworld-server-docker)
